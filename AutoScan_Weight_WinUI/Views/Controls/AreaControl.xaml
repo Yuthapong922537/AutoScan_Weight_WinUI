@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="AutoScan_Weight_WinUI.Views.Controls.AreaControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AutoScan_Weight_WinUI.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:converter ="using:AutoScan_Weight_WinUI.Helps" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    mc:Ignorable="d">
+
+
+
+    <Border x:Name="RootBorder"
+            Width="{StaticResource AreaWidth}"
+            Height="{StaticResource AreaHeight}"
+            Background="{StaticResource AreaEmptyBrush}"
+            BorderBrush="{StaticResource AreaBorderBrush}"
+            BorderThickness="1"
+            CornerRadius="{StaticResource AreaCornerRadius}"
+            Padding="2"
+            PointerEntered="RootBorder_PointerEntered"
+            PointerExited="RootBorder_PointerExited"
+            CanDrag="{Binding CanDrag}"
+            AllowDrop="True"
+            
+            DragStarting="RootBorder_DragStarting"
+            DragOver="RootBorder_DragOver"
+            Drop="RootBorder_Drop"
+            Tapped="RootBorder_Tapped"
+            DragLeave="RootBorder_DragLeave"
+            >
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Border x:Name="HeaderBorder"
+                    Grid.Row="0"
+                    Background="#50545D">
+
+                <TextBlock
+                    Text="{Binding AreaName}"
+                    FontWeight="Bold"
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="White"/>
+
+            </Border>
+
+            <!-- Body -->
+            <Border x:Name="BodyBorder"
+                      Grid.Row="1"
+                    Background="{StaticResource AreaEmptyBrush}">
+
+                <TextBlock
+                    Text="{Binding PalletsNo}"
+                    FontSize="11"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Black"/>
+
+            </Border>
+
+            <ToolTipService.ToolTip>
+
+                <StackPanel>
+
+                    <TextBlock FontWeight="Bold">
+                        <Run Text="Area : "/>
+                        <Run Text="{Binding AreaName}"/>
+                    </TextBlock>
+
+
+                    <TextBlock>
+                        <Run Text="Pallet : "/>
+                        <Run Text="{Binding PalletsNo}"/>
+                    </TextBlock>
+
+
+                    <TextBlock>
+                        <Run Text="Status : "/>
+                        <Run Text="{Binding Status}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="Carton Count : "/>
+                        <Run Text="{Binding CartonCount}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="Max Capacity : "/>
+                        <Run Text="{Binding MaxCapital}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="Wherehouse : "/>
+                        <Run Text="{Binding WarehouseName}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="GroupKey : "/>
+                        <Run Text="{Binding GroupKey}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="GroupType : "/>
+                        <Run Text="{Binding GroupType}"/>
+                    </TextBlock>
+
+                    <TextBlock>
+                        <Run Text="PalletStatus : "/>
+                        <Run Text="{Binding PalletStatus}"/>
+                    </TextBlock>
+
+                </StackPanel>
+
+            </ToolTipService.ToolTip>
+
+
+        </Grid>
+
+        
+
+    </Border>
+    
+
+</UserControl>

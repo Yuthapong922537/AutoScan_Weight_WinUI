@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AutoScan_Weight_WinUI.Views.SelectOrderPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AutoScan_Weight_WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:Helps="using:AutoScan_Weight_WinUI.Helps"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Helps:WeightToBrushConverter x:Key="WeightToBrushConverter"/>
+        <Helps:AreaToBrushConverter x:Key="AreaToBrushConverter"/>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="110"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="40"/>
+
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="690"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="370"/>
+
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+                    <Grid Margin="50,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Auto Weight" FontSize="28" FontWeight="SemiBold"  VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Scan Barcode" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding StatusWeight_Machine, Mode=TwoWay}" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+                <Border Grid.Column="2" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,20,0,0">
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" Grid.Row="0">
+
+                            <FontIcon Glyph="&#xE787;" FontSize="40" Foreground="Orange" Margin="0,20,0,0"/>
+
+                        </Grid>
+
+                        <Grid Grid.Column="1" Grid.Row="0">
+
+                            <TextBlock Text="{Binding CurrentDate}" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkOrange"/>
+
+                        </Grid>
+
+                        <Grid Grid.Column="1" Grid.Row="1">
+
+                            <TextBlock Text="{Binding CurrentTime}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-10,0,0"/>
+
+                        </Grid>
+
+
+                    </Grid>
+
+
+                </Border>
+
+            </Grid>
+
+            <!-- TextBox -->
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="950"/>
+                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="400"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <!--<Image Source="C:\Users\yuthapong.d\source\repos\AutoScan_Weight_WinUI/barcode.png" Height="50" />-->
+                        <!--<FontIcon Glyph="&#xEC5A;" FontSize="40" Foreground="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,20,0,0"/>-->
+                        <ComboBox Width="200"
+                                  Header="Order"
+                                  x:Name="OrderNoComboBox"
+                                    CornerRadius="12"
+                                    IsEditable="True"
+                                    IsTextSearchEnabled="True"
+                                    HorizontalAlignment="Stretch"                                   
+                                    PlaceholderText="-- กรุณาเลือก --"  
+                                  ItemsSource="{Binding OrderNo}"
+                                  SelectedItem="{Binding SelectedOrderNo,Mode=TwoWay}">
+
+                        </ComboBox>
+
+                        <ComboBox Width="250"
+                                  Header="Pack"
+                                  x:Name="PackNoComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText="-- กรุณาเลือก --"
+                                  ItemsSource="{Binding PackNo}"
+                                  SelectedItem="{Binding SelectedPackNo,Mode=TwoWay}" Margin="50,0,0,0">
+
+                        </ComboBox>
+
+                        <ComboBox Width="100"
+                                  Header="FinalDest"                              
+                                  x:Name="FinalDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText="-- กรุณาเลือก --"
+                                  ItemsSource="{Binding FinalDest}"
+                                  SelectedItem="{Binding SelectedFinalDest,Mode=TwoWay}" Margin="50,0,0,0">
+
+                        </ComboBox>
+
+                        <ComboBox Width="150"
+                                  Header="Cartons"
+                                  x:Name="CartonDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText="-- กรุณาเลือก --"
+                                  ItemsSource="{Binding Carton}"
+                                  SelectedItem="{Binding SelectedCarton,Mode=TwoWay}" Margin="50,0,0,0">
+
+                        </ComboBox>
+                    </StackPanel>
+
+                </Border>
+
+
+                <Border Grid.Column="1" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="1" Grid.Column="0">
+
+                            <FontIcon Glyph="&#xF133;" FontSize="40" Foreground="BlueViolet" Margin="0,0,0,0"/>
+                        </Grid>
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+
+                            <TextBlock Text="Carton of / Already done" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="1">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+
+                                <TextBlock Text="{Binding TextCartonOf}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{Binding ColorCartonOf}" Margin="0,0,0,0"/>
+                                <TextBlock Text=" / " FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                <TextBlock Text="{Binding TextOfAll}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{Binding ColorOfAll}" Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="1">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Already done :" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <TextBlock Text="{Binding TextAlready}" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,0,0,0" Foreground="{Binding ColorAlready}"/>
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+                <Border Grid.Column="2" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid>
+
+                            <FontIcon Glyph="&#xE8BF;" FontSize="40" Foreground="#96C285" Margin="0,20,0,0"/>
+
+                        </Grid>
+
+                        <Grid Grid.Row="0" Grid.Column="1">
+
+                            <TextBlock Text="Carton Dairy" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#96C285"/>
+
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{Binding Text_Dairy}" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#96C285"/>
+                                <TextBlock Text="  Cartons" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#96C285"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+
+                    </Grid>
+
+
+                </Border>
+
+
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+
+
+
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0">
+                    <Grid >
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="400"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="500"/>
+                            <ColumnDefinition Width="200"/>
+
+
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <!--<FontIcon Glyph="&#xEC5A;" FontSize="40" Foreground="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,0,0,0"/>-->
+                            <Image Source="C:\Users\yuthapong.d\source\repos\AutoScan_Weight_WinUI/delivery-box.png" Height="50" />
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+
+                            <TextBlock  Text="{Binding TextCarton}" FontSize="50" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{Binding ColorCarton}"  />
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+
+                            <Image Source="C:\Users\yuthapong.d\source\repos\AutoScan_Weight_WinUI/weighing-machine.png" Height="50" />
+
+                            <!--<FontIcon Glyph="&#xF712;" FontSize="40" Foreground="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,0,0,0"/>-->
+                        </Grid>
+
+                        <Grid Grid.Column="3">
+                            <StackPanel >
+                                <TextBlock  Text="Weight (Kg)" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"  />
+
+                                <TextBlock  Text="{Binding TextWeight,Mode=TwoWay}" FontSize="50" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,-10,0,0" Foreground="{Binding ColorWeight}" />
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Column="4">
+                            <Image Source="C:\Users\yuthapong.d\source\repos\AutoScan_Weight_WinUI/map.png" Height="50" />
+                            <!--<FontIcon Glyph="&#xE707;" FontSize="40" Foreground="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,0,0,0"/>-->
+
+                        </Grid>
+
+                        <Grid Grid.Column="5">
+                            <StackPanel >
+                                <TextBlock  Text="Pallet" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"  />
+
+                                <Border Width="200" Height="60" Margin="-300,0,0,0" Background="{Binding KeepingArea_colorBorder}" CornerRadius="12" >
+
+                                    <TextBlock  Text="{Binding TextArea}" FontSize="50" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-10,0,0" Foreground="{Binding ColorWeight}"/>
+                                    
+                                </Border>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Column="6">
+                            <StackPanel >
+                                <TextBlock  Text="Area" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"  />
+
+
+                                <Border Width="200" Height="60" Margin="0,0,0,0" Background="{Binding KeepingArea_colorBorder}" CornerRadius="12" >
+
+                                    <TextBlock  Text="{Binding TextKeepArea}" FontSize="50" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-10,0,0" Foreground="{Binding ColorWeight}"/>
+
+                                </Border>
+
+
+
+                            </StackPanel>
+
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Border   CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+
+                                <FontIcon Glyph="&#xE813;" FontSize="20" Foreground="WhiteSmoke" />
+                                <TextBlock  Text="Carton Information" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" Margin="5,0,10,0"  />
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+
+                            <controls:DataGrid
+                                        x:Name="DataInformation"
+                                        Height="auto"
+                                        RowHeight="40"
+                                        AutoGenerateColumns="False"
+                                        CornerRadius="12"
+                                        SelectionMode="Single"
+                                        BorderThickness="1"
+                                       ItemsSource="{Binding DataWeight}"
+                                        Background="{ThemeResource CardBackgroundFillColorSecondary}">
+
+
+
+                                <controls:DataGrid.Resources>
+                                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundColor" Color="Transparent"  />
+
+                                </controls:DataGrid.Resources>
+
+
+
+                                <controls:DataGrid.CellStyle>
+                                    <Style TargetType="controls:DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="FontSize" Value="24"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    </Style>
+
+
+                                </controls:DataGrid.CellStyle>
+
+                                <controls:DataGrid.Columns>
+
+                                    <controls:DataGridTextColumn
+                                                Header="OrderNo"
+                                                Width="250"                                      
+                                                Binding="{Binding OrderNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="PackNo"
+                                                Width="350"
+                                                Binding="{Binding PackNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="FinalDest"
+                                                Width="200"
+                                                Binding="{Binding FinalDest}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="Carton"
+                                                Width="200"
+                                                Binding="{Binding Carton}"/>
+
+
+                                    <controls:DataGridTemplateColumn 
+                                                Header="Weight"
+                                                Width="200">        
+
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+
+                                                <Border Background="{Binding Weight, Converter={StaticResource WeightToBrushConverter}}"
+                                                        CornerRadius="12"
+                                                        Padding="5">
+
+                                                    <TextBlock Text="{Binding Weight}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                       />
+                                                </Border>
+
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+
+                                       
+                                    </controls:DataGridTemplateColumn>
+
+                                  
+                                    <controls:DataGridTemplateColumn 
+                                        Header="KeepingArea"
+                                        Width="200">
+
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding KeepingArea, Converter={StaticResource AreaToBrushConverter}}"
+                                        CornerRadius="12"
+                                        Padding="5">
+                                                    <TextBlock Text="{Binding KeepingArea}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+
+
+                                    <controls:DataGridTextColumn
+                                            Header="LotRef"
+                                            Width="400"
+                                            Binding="{Binding LotRef}"/>
+
+                                    <controls:DataGridTextColumn
+                                              Header="Invoice"
+                                              Width="200"
+                                              Binding="{Binding InvoiceNo}"/>
+
+
+
+                                </controls:DataGrid.Columns>
+
+                            </controls:DataGrid>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="4">
+
+                <Border CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+
+                                <FontIcon Glyph="&#xE813;" FontSize="20" Foreground="WhiteSmoke" />
+                                <TextBlock  Text="Details (ข้อมูลภายในกล่อง)" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" Margin="5,0,10,0"  />
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+
+                            <controls:DataGrid
+                                         x:Name="DataDetails"
+                                         Height="Auto"
+                                         AutoGenerateColumns="False"
+                                         RowHeight="40"
+                                         CornerRadius="12"
+                                         SelectionMode="Single"
+                                         BorderThickness="1"
+                                         ItemsSource="{Binding DataDetails}"
+                                         Background="{ThemeResource CardBackgroundFillColorSecondary}">
+
+                                <controls:DataGrid.Resources>
+                                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundColor" Color="Transparent"/>
+                                </controls:DataGrid.Resources>
+
+
+                                <controls:DataGrid.CellStyle>
+                                    <Style TargetType="controls:DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="FontSize" Value="24"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    </Style>
+
+
+                                </controls:DataGrid.CellStyle>
+                                <controls:DataGrid.Columns>
+                                    <controls:DataGridTextColumn
+                                                 Header="OrderNo"
+                                                 Width="200"
+                                                 Binding="{Binding OrderNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                 Header="PackNo"
+                                                 Width="310"
+                                                 Binding="{Binding PackNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                 Header="FinalDest"
+                                                 Width="150"
+                                                 Binding="{Binding FinalDest}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                 Header="Carton"
+                                                 Width="150"
+                                                 Binding="{Binding Carton}"/>
+
+
+                                    <controls:DataGridTemplateColumn 
+                                                 Header="Weight"
+                                                 Width="200">
+
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding Weight, Converter={StaticResource WeightToBrushConverter}}"
+                                             CornerRadius="12"
+                                             Padding="5">
+                                                    <!--{Binding ReceiveText, Mode=TwoWay}-->
+                                                    <!--<TextBlock Text="{Binding ReceiveText, Mode=TwoWay}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+
+                                                    <TextBlock Text="{Binding Weight}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+
+
+                                    <controls:DataGridTemplateColumn 
+                                     Header="KeepingArea"
+                                     Width="200">
+
+                                        <controls:DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Border Background="{Binding KeepingArea, Converter={StaticResource AreaToBrushConverter}}"
+                                             CornerRadius="12"
+                                             Padding="5">
+                                                    <TextBlock Text="{Binding KeepingArea}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </DataTemplate>
+                                        </controls:DataGridTemplateColumn.CellTemplate>
+                                    </controls:DataGridTemplateColumn>
+
+
+                                    <controls:DataGridTextColumn
+                                             Header="Size"
+                                             Width="150"
+                                             Binding="{Binding Size}"/>
+
+                                    <controls:DataGridTextColumn
+                                             Header="Color"
+                                             Width="300"
+                                             Binding="{Binding Color}"/>
+
+                                    <controls:DataGridTextColumn
+                                             Header="Qty"
+                                             Width="200"
+                                             Binding="{Binding Qty}"/>
+
+                                </controls:DataGrid.Columns>
+                            </controls:DataGrid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="5">
+
+
+                <Border CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0">
+
+                    <Grid >
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1270"/>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" Grid.Row="0">
+                            <TextBlock  Text="{Binding TextSumSize}" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,10,0"  />
+
+                        </Grid>
+
+                        <Grid Grid.Column="1" Grid.Row="0">
+                            <TextBlock  Text="{Binding TextSumQty}" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,10,0"  />
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+
+            </Grid>
+
+        </Grid>
+    </ScrollViewer>
+</Page>

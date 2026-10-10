@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    
+    x:Class="AutoScan_Weight_WinUI.Views.ShellPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AutoScan_Weight_WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <NavigationView x:Name="NavView"
+    PaneDisplayMode="Left"
+    IsSettingsVisible="False"
+    IsBackButtonVisible="Collapsed"
+    IsBackEnabled="False"
+    SelectionChanged="NavView_SelectionChanged">    
+
+
+        <NavigationView.MenuItems>
+
+            <NavigationViewItem Content="ScanBarcode" Tag="ScanBarcode" Icon="SelectAll" IsEnabled="{x:Bind ViewModel.IsAdmin, Mode=OneWay}"/>
+            <NavigationViewItem Content="SelectOrder" Tag="SelectOrders" Icon="Scan" IsEnabled="{x:Bind ViewModel.IsAdmin, Mode=OneWay}"/>
+            <NavigationViewItem Content="Delete" Tag="Delete" Icon="Delete" IsEnabled="{x:Bind ViewModel.IsAdmin, Mode=OneWay}"/>
+            <NavigationViewItem Content="Area" Tag="Area" Icon="Map" />
+            <!--<NavigationViewItem Content="CartonInStore" Tag="CartonInStore" Icon="XboxOneConsole"/>-->
+
+
+            <!-- Menu Admin -->
+            <!--<NavigationViewItem Content="Admin" Icon="Admin" IsEnabled="{Binding IsAdmin}">
+
+               <NavigationViewItem.MenuItems>
+
+
+                    
+
+
+
+                </NavigationViewItem.MenuItems>
+
+            </NavigationViewItem>-->
+
+        </NavigationView.MenuItems>
+
+        <NavigationView.PaneFooter>
+
+
+
+            <Button Background="Transparent"
+            BorderThickness="0"
+            HorizontalAlignment="Stretch">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <PersonPicture DisplayName="{Binding Session.UserName}" Width="27" HorizontalAlignment="Stretch"/>
+
+                    <!--Username-->
+                    <TextBlock Text="{Binding Session.UserName}" VerticalAlignment="Center" Margin="8"/>
+
+                    <!--<TextBlock Text="{Binding RFID.Status}"/>
+               <TextBlock Text="{Binding IsConnected}"/>-->
+
+
+                </StackPanel>
+
+            </Button>
+
+        </NavigationView.PaneFooter>
+
+        <Frame x:Name="ContentFrame"/>
+
+    </NavigationView>
+</Page>

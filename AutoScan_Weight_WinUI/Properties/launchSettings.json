@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AutoScan_Weight_WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AutoScan_Weight_WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

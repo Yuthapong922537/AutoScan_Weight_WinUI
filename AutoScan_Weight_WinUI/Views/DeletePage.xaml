@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="AutoScan_Weight_WinUI.Views.DeletePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AutoScan_Weight_WinUI.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Helps="using:AutoScan_Weight_WinUI.Helps"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Helps:WeightToBrushConverter x:Key="WeightToBrushConverter"/>
+        <Helps:AreaToBrushConverter x:Key="AreaToBrushConverter"/>
+        <!--style button -->
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#81D8D0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="CornerRadius" Value="8"/>
+        </Style>
+    </Page.Resources>
+    
+    <ScrollViewer>
+        <Grid>
+            
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="110"/>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+
+
+            </Grid.RowDefinitions>
+            <!-- Header -->
+
+            <Grid Grid.Row="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="690"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+                    <Grid Margin="50,0,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Auto Weight" FontSize="28" FontWeight="SemiBold"  VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Delete Carton" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                            
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Border>
+
+
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="950"/>
+                    <ColumnDefinition Width="350"/>
+                    <ColumnDefinition Width="450"/>
+                    <ColumnDefinition Width="400"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+
+                    <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
+                        <!--<Image Source="C:\Users\yuthapong.d\source\repos\AutoScan_Weight_WinUI/barcode.png" Height="50" />-->
+                        <!--<FontIcon Glyph="&#xEC5A;" FontSize="40" Foreground="{ThemeResource CardBackgroundFillColorSecondary}" Margin="0,20,0,0"/>-->
+                        <ComboBox Width="200"
+                                  
+                                  x:Name="OrderNoComboBox"
+                                    CornerRadius="12"
+                                    IsEditable="True"
+                                    IsTextSearchEnabled="True"
+                                    HorizontalAlignment="Stretch"                                   
+                                    PlaceholderText="-- กรุณาเลือก --"  
+                                  ItemsSource="{Binding PackingList}"
+                                  SelectedItem="{Binding SelectedPacking,Mode=TwoWay}">
+                            <ComboBox.Header>
+                                <TextBlock Text="PackingList"
+                                            Foreground="Red"
+                                            FontWeight="SemiBold"
+                                           FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>
+
+                        <!--<ComboBox Width="250"
+                                  
+                                  x:Name="PackNoComboBox"
+                                  
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding PackNo}"
+                                  SelectedItem="{Binding SelectedPackNo,Mode=TwoWay}" Margin="50,0,0,0">
+                            <ComboBox.Header>
+                                <TextBlock Text="PackNo"
+                                            Foreground="GreenYellow"
+                                            FontWeight="SemiBold"
+                                           FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>-->
+
+                        <!--<ComboBox Width="100"
+                                  
+                                  
+                                  x:Name="FinalDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding FinalDest}"
+                                  SelectedItem="{Binding SelectedFinalDest,Mode=TwoWay}" Margin="50,0,0,0">
+
+                            <ComboBox.Header>
+                                <TextBlock Text="FinalDest"
+                                             Foreground="Yellow"
+                                             FontWeight="SemiBold"
+                                            FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>
+
+                        <ComboBox Width="150"
+                                 
+                                  x:Name="CartonDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding Carton}"
+                                  SelectedItem="{Binding SelectedCarton,Mode=TwoWay}" Margin="50,0,0,0">
+
+                            <ComboBox.Header>
+                                <TextBlock Text="Cartons"
+                                             Foreground="Orchid"
+                                             FontWeight="SemiBold"
+                                            FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>-->
+                    </StackPanel>
+
+                </Border>
+
+
+                <Border Grid.Column="1" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,0,0">
+
+                    <Button Content="Delete" 
+                            Command="{Binding DeleteCommand}"
+                            VerticalAlignment="Center"
+                            Width="200"
+                            Height="50"
+                            Margin="50,0,0,0"
+                            Style="{StaticResource MyButtonStyle}"/>
+
+
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Border   CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0">
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="Auto"/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <StackPanel Orientation="Horizontal" Margin="50,0,0,0">
+
+                                <FontIcon Glyph="&#xE813;" FontSize="20" Foreground="WhiteSmoke" />
+                                <TextBlock  Text="Carton Delete" FontSize="20" FontWeight="SemiBold" VerticalAlignment="Center" Margin="5,0,10,0"  />
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+
+                            <controls:DataGrid
+                                        x:Name="DataInformation"
+                                        Height="500"
+                                        RowHeight="40"
+                                        AutoGenerateColumns="False"
+                                        CornerRadius="12"
+                                        SelectionMode="Single"
+                                        BorderThickness="1"
+                                        ItemsSource="{Binding DataWeight}"
+                                        Background="{ThemeResource CardBackgroundFillColorSecondary}">
+
+
+
+                                <controls:DataGrid.Resources>
+                                    <SolidColorBrush x:Key="DataGridColumnHeaderBackgroundColor" Color="Transparent"  />
+
+                                </controls:DataGrid.Resources>
+
+
+
+                                <controls:DataGrid.CellStyle>
+                                    <Style TargetType="controls:DataGridCell">
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="FontSize" Value="24"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                    </Style>
+
+
+                                </controls:DataGrid.CellStyle>
+
+                                <controls:DataGrid.Columns>
+
+                                    <controls:DataGridTextColumn
+                                                Header="PalletNo"
+                                                Width="250"                                      
+                                                Binding="{Binding PalletNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="DocNo"
+                                                Width="350"
+                                                Binding="{Binding DocNo}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="Warehouse"
+                                                Width="200"
+                                                Binding="{Binding Warehouse}"/>
+
+
+                                    <controls:DataGridTextColumn
+                                                Header="BarcodeCarton"
+                                                Width="200"
+                                                Binding="{Binding BarcodeCarton}"/>
+
+                                    <controls:DataGridTextColumn
+                                                Header="Carton"
+                                                Width="200"
+                                                Binding="{Binding Scancarton}"/>
+
+                                    <controls:DataGridTextColumn
+                                                Header="Invoice"
+                                                Width="200"
+                                                Binding="{Binding InvoiceNo}"/>
+
+                                    <controls:DataGridTextColumn
+                                                Header="Customer"
+                                                Width="200"
+                                                Binding="{Binding Customer}"/>
+
+                                    <controls:DataGridTextColumn
+                                                Header="PalceStatus"
+                                                Width="200"
+                                                Binding="{Binding PlaceStatus}"/>
+                                    <controls:DataGridTextColumn
+                                                Header="Date"
+                                                Width="200"
+                                                Binding="{Binding CreateDate}"/>
+
+
+
+
+
+
+                                </controls:DataGrid.Columns>
+
+                            </controls:DataGrid>
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Row="3">
+
+                <Border CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorSecondary}" Margin="50,20,10,0" >
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <!--<TextBox Header="Barcode Scan Box" Width="400" Height="60" Margin="50,0,0,0"
+                                  Text="{Binding BarcodeCarton , Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                  x:Name="BarcodeCartonTextBox"
+                                  KeyDown="txt_BarcodeCarton_KeyDown" 
+                                  PlaceholderText="BarcodeCarton..."
+                                 HorizontalAlignment="Left"
+                                  />-->
+
+                        <ComboBox Width="250"
+                                  
+                                  x:Name="OrderComboBox"
+                                  
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding Order}"
+                                  SelectedItem="{Binding SelectedOrder,Mode=TwoWay}" Margin="50,0,0,0">
+                            <ComboBox.Header>
+                                <TextBlock Text="OrderNo"
+                                            Foreground="Red"
+                                            FontWeight="SemiBold"
+                                           FontSize="24"/>
+                            </ComboBox.Header>
+                        </ComboBox>
+
+                        <ComboBox Width="250"
+                                  
+                                  x:Name="PackComboBox"
+                                  
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding Pack}"
+                                  SelectedItem="{Binding SelectedPack,Mode=TwoWay}" Margin="50,0,0,0">
+                            <ComboBox.Header>
+                                <TextBlock Text="PackNo"
+                                            Foreground="GreenYellow"
+                                            FontWeight="SemiBold"
+                                           FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>
+
+                        <ComboBox Width="100"
+                                  
+                                  
+                                  x:Name="FinalDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding FinalDest}"
+                                  SelectedItem="{Binding SelectedFinalDest,Mode=TwoWay}" Margin="50,0,0,0">
+
+                            <ComboBox.Header>
+                                <TextBlock Text="FinalDest"
+                                             Foreground="Yellow"
+                                             FontWeight="SemiBold"
+                                            FontSize="24"/>
+                            </ComboBox.Header>
+                        </ComboBox>
+
+                        <ComboBox Width="150"
+         
+                                  x:Name="CartonDestComboBox"
+                                  CornerRadius="12"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  HorizontalAlignment="Stretch"                                   
+                                  PlaceholderText=" กรุณาเลือก "
+                                  ItemsSource="{Binding Carton}"
+                                  SelectedItem="{Binding SelectedCarton,Mode=TwoWay}" Margin="50,0,0,0">
+
+                            <ComboBox.Header>
+                                <TextBlock Text="Cartons"
+                                            Foreground="Orchid"
+                                            FontWeight="SemiBold"
+                                            FontSize="24"/>
+                            </ComboBox.Header>
+
+                        </ComboBox>
+
+                        <Button Content="Withdraw" 
+                                 Command="{Binding DeleteTextCommand}"
+                                 VerticalAlignment="Center"
+                                 Width="200"
+                                 Height="50"
+                                 Margin="50,0,0,0"
+                                 Style="{StaticResource MyButtonStyle}"/>
+
+                    </StackPanel>
+                </Border>
+                
+            </Grid>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</Page>
